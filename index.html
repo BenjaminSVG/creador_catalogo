@@ -31,8 +31,17 @@
                 <input type="text" id="engine" name="engine">
             </div>
             <div class="form-group">
-                <label for="price">Precio (USD):</label>
-                <input type="number" id="price" name="price" min="0" step="1">
+                <label for="price">Precio:</label>
+                <div class="price-input-container">
+                    <input type="number" id="price" name="price" min="0" step="1">
+                    <div class="currency-switch">
+                        <input type="checkbox" id="currencyToggle" class="currency-toggle">
+                        <label for="currencyToggle" class="currency-label">
+                            <span class="currency usd">USD</span>
+                            <span class="currency gs">GS</span>
+                        </label>
+                    </div>
+                </div>
             </div>
             <div id="features-container">
                 <div class="form-group feature-group">

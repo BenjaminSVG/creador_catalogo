@@ -222,6 +222,76 @@ select {
     font-weight: 600;
 }
 
+/* Estilos para el contenedor del precio y switch */
+.price-input-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Estilos para el switch de moneda */
+.currency-switch {
+    position: relative;
+    display: inline-block;
+}
+
+.currency-toggle {
+    display: none;
+}
+
+.currency-label {
+    display: flex;
+    align-items: center;
+    width: 100px;
+    height: 34px;
+    background: var(--background-light);
+    border-radius: 17px;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+    border: 2px solid var(--border-color);
+}
+
+.currency {
+    width: 50%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    z-index: 1;
+    color: var(--text-light);
+}
+
+.currency-label::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    width: 46px;
+    height: 26px;
+    border-radius: 13px;
+    background: var(--primary-color);
+    transition: var(--transition);
+}
+
+.currency-toggle:checked + .currency-label::after {
+    left: calc(100% - 48px);
+}
+
+.currency-toggle:checked ~ .currency-label .usd {
+    color: var(--text-light);
+}
+
+.currency-toggle:checked ~ .currency-label .gs {
+    color: white;
+}
+
+.currency-toggle:not(:checked) ~ .currency-label .usd {
+    color: white;
+}
+
+.currency-toggle:not(:checked) ~ .currency-label .gs {
+    color: var(--text-light);
+}
+
 /* Responsive Design */
 
 /* Tablets */

@@ -26,19 +26,45 @@ document.addEventListener('DOMContentLoaded', function() {
         featureCount++;
     });
 
+    const currencyToggle = document.getElementById('currencyToggle');
+    const priceInput = document.getElementById('price');
+    const USD_TO_GS_RATE = 7300; // Tasa de conversión aproximada (ajustar según necesidad)
+
+    let lastUsdValue = '';
+    let lastGsValue = '';
+
+    currencyToggle.addEventListener('change', function() {
+        const currentValue = priceInput.value;
+        
+        if (currentValue) {
+            if (this.checked) {
+                // Convertir de USD a GS
+                lastUsdValue = currentValue;
+                priceInput.value = Math.round(currentValue * USD_TO_GS_RATE);
+                priceInput.step = "1000";
+            } else {
+                // Convertir de GS a USD
+                lastGsValue = currentValue;
+                priceInput.value = Math.round(currentValue / USD_TO_GS_RATE);
+                priceInput.step = "1";
+            }
+        }
+    });
+
     form.addEventListener('submit', function(event) {
         event.preventDefault();
 
         // Recoger todos los datos del formulario
         const data = {
             carName: document.getElementById('carName').value,
-            price: document.getElementById('price').value,
+            price: priceInput.value,
             mileage: document.getElementById('mileage').value,
             status: document.getElementById('status').value,
             engine: document.getElementById('engine').value,
             features: Array.from(document.querySelectorAll('input[name="features[]"]'))
                 .map(input => input.value)
-                .filter(value => value.trim() !== '')
+                .filter(value => value.trim() !== ''),
+            currency: currencyToggle.checked ? 'GS' : 'USD',
         };
 
         if (!data.carName) {
@@ -91,11 +117,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     function generateHTMLTemplate(data) {
-        const { carName, price, mileage, status, engine, features } = data;
+        const { carName, price, mileage, status, engine, features, currency } = data;
         const isAvailable = status === 'available';
         const statusText = isAvailable ? 'Disponible' : 'Vendido';
         const statusClass = isAvailable ? '' : 'sold';
-        const priceDisplay = price ? `$${parseInt(price).toLocaleString()} USD` : 'Consultar Precio';
+        const priceDisplay = currency === 'USD' 
+            ? `$${parseInt(price).toLocaleString()} USD`
+            : `${parseInt(price).toLocaleString()} GS`;
         
         // Define WhatsApp message
         const whatsappMessage = isAvailable 
