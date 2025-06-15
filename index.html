@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Detalles del Auto</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Detalles del Vehículo</h1>
+        <form id="carDetailsForm">
+            <div class="form-group">
+                <label for="carName">Nombre del Auto:</label>
+                <input type="text" id="carName" name="carName">
+            </div>
+            <div class="form-group">
+                <label for="mileage">Kilometraje:</label>
+                <input type="number" id="mileage" name="mileage">
+            </div>
+            <div class="form-group">
+                <label for="status">Estado:</label>
+                <select id="status" name="status">
+                    <option value="available">Disponible</option>
+                    <option value="sold">Vendido</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="engine">Motor:</label>
+                <input type="text" id="engine" name="engine">
+            </div>
+            <div class="form-group">
+                <label for="price">Precio (USD):</label>
+                <input type="number" id="price" name="price" min="0" step="1">
+            </div>
+            <div id="features-container">
+                <div class="form-group feature-group">
+                    <label for="feature-0">Característica:</label>
+                    <div class="feature-input-group">
+                        <input type="text" id="feature-0" name="features[]">
+                        <button type="button" class="add-feature" title="Agregar característica">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">Guardar</button>
+        </form>
+    </div>
+    <script src="form.js"></script>
+</body>
+</html>
